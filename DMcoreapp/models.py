@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 # from django.contrib.postgres.fields import JSONField
 from django.db.models import JSONField
+from datetime import date
 # Create your models here.
 
 
@@ -347,10 +348,12 @@ class daily_leeds(models.Model):
     company_name = models.CharField(max_length=255,null=True,blank=True,default='')
     register = models.CharField(max_length=255,null=True,blank=True,default='')
     ex_duration = models.CharField(max_length=255,null=True,blank=True,default='')
+    
 
 
 class daily_leeds_exists(models.Model):
     daily=models.ForeignKey(daily_work,on_delete=models.CASCADE,null=True,blank=True)
+    date = models.DateField(default=date.today)
     name = models.CharField(max_length=255,null=True,blank=True,default='')
     email_id = models.CharField(max_length=255,null=True,blank=True,default='')
     ph_no = models.CharField(max_length=255,null=True,blank=True,default='')
@@ -369,6 +372,7 @@ class daily_leeds_exists(models.Model):
     company_name = models.CharField(max_length=255,null=True,blank=True,default='')
     register = models.CharField(max_length=255,null=True,blank=True,default='')
     ex_duration = models.CharField(max_length=255,null=True,blank=True,default='')
+    executive=models.CharField(max_length=255,null=True,blank=True,default='')
 
 
 class progress_report(models.Model):

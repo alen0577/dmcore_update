@@ -212,5 +212,13 @@ urlpatterns = [
     path('tc_filter_day_previous_leads', views.tc_filter_day_previous_leads, name='tc_filter_day_previous_leads'),
     path('tc_filter_month_previous_leads', views.tc_filter_month_previous_leads, name='tc_filter_month_previous_leads'),
 
+
+
+#----------------------------------------------------<Alen Antony> <Executive section>---------------------------------------------------------------
+    path('ex_duplicate_leads',views.duplicate_leads,name='duplicate_leads'),
+    path('ex_flt_day_duplicate/',views.ex_flt_day_duplicate,name='ex_flt_day_duplicate'),
+    path('ex_flt_month_duplicate/',views.ex_flt_month_duplicate,name='ex_flt_month_duplicate'),
+
+
 ]
 
