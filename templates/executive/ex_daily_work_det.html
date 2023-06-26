@@ -265,9 +265,16 @@
 
                   <td style="color:white;">
                     <a href="" data-toggle="modal" data-target="#dis{{dl.id}}">
-                      <div class="badge badge-outline-info" >View Description</div>                       
+                      <div class="badge badge-outline-info" >View Description</div>
+                                             
                     </a>
+
+                    <!-- <input type="number" id="count" value="{{dl.target_count}}" hidden>
+                    <input type="number" id="target" value="{{dp.target}}" hidden>
                     
+                    <div id="targetCountBadge" class="badge1">{{dl.target_count}}</div> -->
+
+
                     <!-- {% if dl.target_count < dp.target %}
 
                     <div class="badge badge-outline-success ms-3" >{{dl.target_count}}</div>
@@ -290,11 +297,23 @@
                     <div class="badge badge-outline-success">{{dl.target_count}}</div>
                     
                     {% else %}
-                    <div class="badge badge-outline-warning">{{dl.target_count}}</div>
+                    <div class="badge badge-outline-danger">{{dl.target_count}}</div>
 
                     {%endif%}
+
+                    <!-- {% if dl.target_count ==  dp.target %}
+                    <button class="btn btn-outline-warning" type="button">{{dl.target_count}}</button>
+                    {% elif dl.target_count >  dp.target %}
+                    <button class="btn btn-outline-success" type="button">{{dl.target_count}}</button>
+                    {% else %}
+                    <button class="btn btn-outline-danger" type="button">{{dl.target_count}}</button>
+                    {% endif %} -->
+
+
+
                    
                   </td>
+                  
 
                   <td style="color:white;">
                     {% if dl.daily_file == ""%}
@@ -1329,6 +1348,49 @@ function check_pr(){
   function setselected(id) {
     $('input[name="selected"]').val(id);
   }
+</script>
+
+<style>
+  .badge1 {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .badge1-green {
+    background-color: green;
+    color: white;
+  }
+  
+  .badge1-yellow {
+    background-color: yellow;
+    color: black;
+  }
+  
+  .badge1-red {
+    background-color: red;
+    color: white;
+  }
+</style>
+
+<script>
+  var targetCount = document.getElementById('count');
+  var target = document.getElementById('target');
+
+  var targetCountBadge = document.getElementById("targetCountBadge");
+
+  if (targetCount > target) {
+      targetCountBadge.classList.add("badge1-green");
+    }
+  else if (targetCount === target) {
+    targetCountBadge.classList.add("badge1-yellow");
+  }  
+  else {
+    targetCountBadge.classList.add("badge1-red");
+  }
+
 </script>
 
 

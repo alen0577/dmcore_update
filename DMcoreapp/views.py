@@ -1747,13 +1747,12 @@ def ex_dashboard(request):
     cor=correction.objects.filter(executive=ids).order_by('id').last()
     
     dt=date.today()
-    count=daily_leeds_exists.objects.filter(date=dt,executive=usr).count()
+    
 
     context={
         "usr":usr,
         "cor":cor,
-        "dt":dt,
-        'count':count,
+        "dt":dt,     
     }
     return render(request, 'executive/ex_dashboard.html',context)
 
@@ -1786,6 +1785,9 @@ def ex_daily_work_det(request,id):
     dts=date.today()
     dl_leeds=daily_leeds.objects.all()
     cr_date=date.today()
+    count=daily_leeds_exists.objects.filter(date=dts,executive=usr).count()
+
+    
     
     context={
         "usr":usr,
@@ -1797,6 +1799,7 @@ def ex_daily_work_det(request,id):
         "dl_off":dl_off,
         "dl_leeds":dl_leeds,
         "dts":dts,
+        'count':count,
         
     }
     return render(request, 'executive/ex_daily_work_det.html',context)
@@ -1934,36 +1937,36 @@ def daily_work_done(request,id):
                 if daily_leeds.objects.filter(name=ele[0],email_id=ele[1],ph_no=ele[2]).exists():
                     if str(ele[7]) == "no":
                         if str(ele[12]) == "fresher":
-                            created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=ele[12],previous_experience=None,company_name=None,register=ele[15],duration=None,daily=dl,ex_duration=None)
+                            created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=ele[12],previous_experience=None,company_name=None,register=ele[15],duration=None,daily=dl,ex_duration=None,executive=usr)
                         else:
-                            created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=ele[12],previous_experience=ele[13],company_name=ele[14],register=ele[15],duration=None,daily=dl,ex_duration=ele[17])
+                            created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=ele[12],previous_experience=ele[13],company_name=ele[14],register=ele[15],duration=None,daily=dl,ex_duration=ele[17],executive=usr)
 
                     else:
                         if str(ele[12]) == "fresher":
                             fromdate=datetime.strptime(str(ele[10]), "%Y-%m-%d").date()
                             todate=datetime.strptime(str(ele[11]), "%Y-%m-%d").date()
-                            created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=ele[8],internship_topic=ele[9],internship_start=fromdate,internship_end=todate,fresher_experience=ele[12],previous_experience=None,company_name=None,register=None,duration=ele[16],daily=dl,ex_duration=None)
+                            created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=ele[8],internship_topic=ele[9],internship_start=fromdate,internship_end=todate,fresher_experience=ele[12],previous_experience=None,company_name=None,register=None,duration=ele[16],daily=dl,ex_duration=None,executive=usr)
                         else:
                             fromdate=datetime.strptime(str(ele[10]), "%Y-%m-%d").date()
                             todate=datetime.strptime(str(ele[11]), "%Y-%m-%d").date()
-                            created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=ele[8],internship_topic=ele[9],internship_start=fromdate,internship_end=todate,fresher_experience=ele[12],previous_experience=ele[13],company_name=ele[14],register=ele[15],duration=ele[16],daily=dl,ex_duration=ele[17])
+                            created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=ele[8],internship_topic=ele[9],internship_start=fromdate,internship_end=todate,fresher_experience=ele[12],previous_experience=ele[13],company_name=ele[14],register=ele[15],duration=ele[16],daily=dl,ex_duration=ele[17],executive=usr)
                 else:
                     if int(ele[16]) > 6:
                         if str(ele[7]) == "no":
                             if str(ele[12]) == "fresher":
-                                created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=ele[12],previous_experience=None,company_name=None,register=ele[15],duration=None,daily=dl,ex_duration=None)
+                                created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=ele[12],previous_experience=None,company_name=None,register=ele[15],duration=None,daily=dl,ex_duration=None,executive=usr)
                             else:
-                                created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=ele[12],previous_experience=ele[13],company_name=ele[14],register=ele[15],duration=None,daily=dl,ex_duration=ele[17])
+                                created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=ele[12],previous_experience=ele[13],company_name=ele[14],register=ele[15],duration=None,daily=dl,ex_duration=ele[17],executive=usr)
 
                         else:
                             if str(ele[12]) == "fresher":
                                 fromdate=datetime.strptime(str(ele[10]), "%Y-%m-%d").date()
                                 todate=datetime.strptime(str(ele[11]), "%Y-%m-%d").date()
-                                created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=ele[8],internship_topic=ele[9],internship_start=fromdate,internship_end=todate,fresher_experience=ele[12],previous_experience=None,company_name=None,register=None,duration=ele[16],daily=dl,ex_duration=None)
+                                created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=ele[8],internship_topic=ele[9],internship_start=fromdate,internship_end=todate,fresher_experience=ele[12],previous_experience=None,company_name=None,register=None,duration=ele[16],daily=dl,ex_duration=None,executive=usr)
                             else:
                                 fromdate=datetime.strptime(str(ele[10]), "%Y-%m-%d").date()
                                 todate=datetime.strptime(str(ele[11]), "%Y-%m-%d").date()
-                                created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=ele[8],internship_topic=ele[9],internship_start=fromdate,internship_end=todate,fresher_experience=ele[12],previous_experience=ele[13],company_name=ele[14],register=ele[15],duration=ele[16],daily=dl,ex_duration=ele[17])
+                                created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=ele[8],internship_topic=ele[9],internship_start=fromdate,internship_end=todate,fresher_experience=ele[12],previous_experience=ele[13],company_name=ele[14],register=ele[15],duration=ele[16],daily=dl,ex_duration=ele[17],executive=usr)
                         
                         
                     else:
@@ -1971,19 +1974,19 @@ def daily_work_done(request,id):
                         if int(ele[17]) > 12:
                             if str(ele[7]) == "no":
                                 if str(ele[12]) == "fresher":
-                                    created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=ele[12],previous_experience=None,company_name=None,register=ele[15],duration=None,daily=dl,ex_duration=None)
+                                    created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=ele[12],previous_experience=None,company_name=None,register=ele[15],duration=None,daily=dl,ex_duration=None,executive=usr)
                                 else:
-                                    created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=ele[12],previous_experience=ele[13],company_name=ele[14],register=ele[15],duration=None,daily=dl,ex_duration=ele[17])
+                                    created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=ele[12],previous_experience=ele[13],company_name=ele[14],register=ele[15],duration=None,daily=dl,ex_duration=ele[17],executive=usr)
 
                             else:
                                 if str(ele[12]) == "fresher":
                                     fromdate=datetime.strptime(str(ele[10]), "%Y-%m-%d").date()
                                     todate=datetime.strptime(str(ele[11]), "%Y-%m-%d").date()
-                                    created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=ele[8],internship_topic=ele[9],internship_start=fromdate,internship_end=todate,fresher_experience=ele[12],previous_experience=None,company_name=None,register=None,duration=ele[16],daily=dl,ex_duration=None)
+                                    created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=ele[8],internship_topic=ele[9],internship_start=fromdate,internship_end=todate,fresher_experience=ele[12],previous_experience=None,company_name=None,register=None,duration=ele[16],daily=dl,ex_duration=None,executive=usr)
                                 else:
                                     fromdate=datetime.strptime(str(ele[10]), "%Y-%m-%d").date()
                                     todate=datetime.strptime(str(ele[11]), "%Y-%m-%d").date()
-                                    created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=ele[8],internship_topic=ele[9],internship_start=fromdate,internship_end=todate,fresher_experience=ele[12],previous_experience=ele[13],company_name=ele[14],register=ele[15],duration=ele[16],daily=dl,ex_duration=ele[17])
+                                    created = daily_leeds_exists.objects.get_or_create(name=ele[0],email_id=ele[1],ph_no=ele[2],location=ele[3],qualification=ele[4],year_of_passout=ele[5],collegename=ele[6],internship=ele[7],internship_institute=ele[8],internship_topic=ele[9],internship_start=fromdate,internship_end=todate,fresher_experience=ele[12],previous_experience=ele[13],company_name=ele[14],register=ele[15],duration=ele[16],daily=dl,ex_duration=ele[17],executive=usr)
                             
                         else:
                             
@@ -2066,21 +2069,21 @@ def daily_work_done(request,id):
                         if str(row[9]) == "no":
                             if str(row[8]) == "fresher":
                             
-                                created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=row[8],previous_experience=None,company_name=None,duration=None, register=row[17],daily=dl,ex_duration=None)
+                                created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=row[8],previous_experience=None,company_name=None,duration=None, register=row[17],daily=dl,ex_duration=None,executive=usr)
                             else:
                                 fromdate=datetime.strptime(str(row[11].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
                                 todate=datetime.strptime(str(row[12].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
-                                created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=row[8],previous_experience=row[14],company_name=row[15],duration=int(row[16]), register=row[17],daily=dl,ex_duration=int(row[18]))
+                                created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=row[8],previous_experience=row[14],company_name=row[15],duration=int(row[16]), register=row[17],daily=dl,ex_duration=int(row[18]),executive=usr)
 
                         else:
                             if str(row[8]) == "fresher":
                                 fromdate=datetime.strptime(str(row[11].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
                                 todate=datetime.strptime(str(row[12].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
-                                created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=row[13],internship_topic=row[10],internship_start=fromdate,internship_end=todate,fresher_experience=row[8],previous_experience=None,company_name=None,duration=None, register=row[17],daily=dl,ex_duration=None)
+                                created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=row[13],internship_topic=row[10],internship_start=fromdate,internship_end=todate,fresher_experience=row[8],previous_experience=None,company_name=None,duration=None, register=row[17],daily=dl,ex_duration=None,executive=usr)
                             else:
                                 fromdate=datetime.strptime(str(row[11].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
                                 todate=datetime.strptime(str(row[12].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
-                                created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=row[13],internship_topic=row[10],internship_start=fromdate,internship_end=todate,fresher_experience=row[8],previous_experience=row[14],company_name=row[15],duration=int(row[16]), register=row[17],daily=dl,ex_duration=int(row[18]))
+                                created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=row[13],internship_topic=row[10],internship_start=fromdate,internship_end=todate,fresher_experience=row[8],previous_experience=row[14],company_name=row[15],duration=int(row[16]), register=row[17],daily=dl,ex_duration=int(row[18]),executive=usr)
 
 
                     else:
@@ -2094,21 +2097,21 @@ def daily_work_done(request,id):
                             if str(row[9]) == "no":
                                 if str(row[8]) == "fresher":
                                 
-                                    created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=row[8],previous_experience=None,company_name=None,duration=None, register=row[17],daily=dl,ex_duration=None)
+                                    created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=row[8],previous_experience=None,company_name=None,duration=None, register=row[17],daily=dl,ex_duration=None,executive=usr)
                                 else:
                                     fromdate=datetime.strptime(str(row[11].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
                                     todate=datetime.strptime(str(row[12].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
-                                    created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=row[8],previous_experience=row[14],company_name=row[15],duration=int(row[16]), register=row[17],daily=dl,ex_duration=int(row[18]))
+                                    created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=row[8],previous_experience=row[14],company_name=row[15],duration=int(row[16]), register=row[17],daily=dl,ex_duration=int(row[18]),executive=usr)
 
                             else:
                                 if str(row[8]) == "fresher":
                                     fromdate=datetime.strptime(str(row[11].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
                                     todate=datetime.strptime(str(row[12].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
-                                    created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=row[13],internship_topic=row[10],internship_start=fromdate,internship_end=todate,fresher_experience=row[8],previous_experience=None,company_name=None,duration=None, register=row[17],daily=dl,ex_duration=None)
+                                    created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=row[13],internship_topic=row[10],internship_start=fromdate,internship_end=todate,fresher_experience=row[8],previous_experience=None,company_name=None,duration=None, register=row[17],daily=dl,ex_duration=None,executive=usr)
                                 else:
                                     fromdate=datetime.strptime(str(row[11].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
                                     todate=datetime.strptime(str(row[12].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
-                                    created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=row[13],internship_topic=row[10],internship_start=fromdate,internship_end=todate,fresher_experience=row[8],previous_experience=row[14],company_name=row[15],duration=int(row[16]), register=row[17],daily=dl,ex_duration=int(row[18]))
+                                    created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=row[13],internship_topic=row[10],internship_start=fromdate,internship_end=todate,fresher_experience=row[8],previous_experience=row[14],company_name=row[15],duration=int(row[16]), register=row[17],daily=dl,ex_duration=int(row[18]),executive=usr)
 
 
 
@@ -2118,21 +2121,21 @@ def daily_work_done(request,id):
                                 if str(row[9]) == "no":
                                     if str(row[8]) == "fresher":
                                     
-                                        created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=row[8],previous_experience=None,company_name=None,duration=None, register=row[17],daily=dl,ex_duration=None)
+                                        created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=row[8],previous_experience=None,company_name=None,duration=None, register=row[17],daily=dl,ex_duration=None,executive=usr)
                                     else:
                                         fromdate=datetime.strptime(str(row[11].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
                                         todate=datetime.strptime(str(row[12].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
-                                        created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=row[8],previous_experience=row[14],company_name=row[15],duration=int(row[16]), register=row[17],daily=dl,ex_duration=int(row[18]))
+                                        created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=None,internship_topic=None,internship_start=None,internship_end=None,fresher_experience=row[8],previous_experience=row[14],company_name=row[15],duration=int(row[16]), register=row[17],daily=dl,ex_duration=int(row[18]),executive=usr)
 
                                 else:
                                     if str(row[8]) == "fresher":
                                         fromdate=datetime.strptime(str(row[11].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
                                         todate=datetime.strptime(str(row[12].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
-                                        created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=row[13],internship_topic=row[10],internship_start=fromdate,internship_end=todate,fresher_experience=row[8],previous_experience=None,company_name=None,duration=None, register=row[17],daily=dl,ex_duration=None)
+                                        created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=row[13],internship_topic=row[10],internship_start=fromdate,internship_end=todate,fresher_experience=row[8],previous_experience=None,company_name=None,duration=None, register=row[17],daily=dl,ex_duration=None,executive=usr)
                                     else:
                                         fromdate=datetime.strptime(str(row[11].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
                                         todate=datetime.strptime(str(row[12].date()), '%Y-%m-%d').strftime('%Y-%m-%d')
-                                        created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=row[13],internship_topic=row[10],internship_start=fromdate,internship_end=todate,fresher_experience=row[8],previous_experience=row[14],company_name=row[15],duration=int(row[16]), register=row[17],daily=dl,ex_duration=int(row[18]))
+                                        created = daily_leeds_exists.objects.get_or_create(name=row[2],email_id=row[1],ph_no=row[3],location=row[7],qualification=row[4],year_of_passout=int(row[5]),collegename=row[6],internship=row[9],internship_institute=row[13],internship_topic=row[10],internship_start=fromdate,internship_end=todate,fresher_experience=row[8],previous_experience=row[14],company_name=row[15],duration=int(row[16]), register=row[17],daily=dl,ex_duration=int(row[18]),executive=usr)
 
 
 
@@ -4415,7 +4418,7 @@ def duplicate_leads(request):
     usr = user_registration.objects.get(id=ids)
     count=daily_leeds_exists.objects.filter(date=today,executive=usr).count()
 
-    duplicate= daily_leeds_exists.objects.filter(executive=usr).order_by('date')
+    duplicate= daily_leeds_exists.objects.filter(executive=usr).order_by('-date')
     
     context={
         "usr":usr,
